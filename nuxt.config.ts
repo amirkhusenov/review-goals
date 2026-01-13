@@ -25,9 +25,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    // Supabase (server-side) - используем SUPABASE_KEY из .env
-    supabaseUrl: process.env.SUPABASE_URL,
-    supabaseKey: process.env.SUPABASE_KEY || process.env.SUPABASE_SERVICE_KEY,
+    // Supabase (server-side) - используем SUPABASE_SERVICE_KEY для server-side операций
+    supabaseUrl: process.env.SUPABASE_URL || '',
+    supabaseKey: process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY || '',
     // OAuth secrets (optional - только если указаны в .env)
     oauth: {
       google: {
@@ -44,13 +44,14 @@ export default defineNuxtConfig({
       password: process.env.NUXT_SESSION_PASSWORD || 'default-session-password-change-in-production'
     },
     public: {
-      supabaseUrl: process.env.SUPABASE_URL,
-      supabaseAnonKey: process.env.SUPABASE_KEY,
-      // OAuth availability flags
       oauthGoogleEnabled: !!(process.env.NUXT_OAUTH_GOOGLE_CLIENT_ID && process.env.NUXT_OAUTH_GOOGLE_CLIENT_SECRET),
       oauthGithubEnabled: !!(process.env.NUXT_OAUTH_GITHUB_CLIENT_ID && process.env.NUXT_OAUTH_GITHUB_CLIENT_SECRET),
       ollamaUrl: 'http://localhost:11434',
       ollamaModel: 'llama3.2'
+    },
+    supabase: {
+      url: "https://uyvjizkfvnfbbfhgevqt.supabase.co",
+      key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV5dmppemtmdm5mYmJmaGdldnF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjY5OTUyNjEsImV4cCI6MjA4MjU3MTI2MX0.gskMGiEusswtD6Mn0XLKS_v77O8BQ1RiOtaWqurr3xE",
     }
   }
 })
